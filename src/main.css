@@ -1,0 +1,50 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #f1da0a23;
+}
+
+#title {
+    text-align: center;
+    font-size: 3rem;
+}
+
+#contents-area {
+    padding: 20px 0px 20px 0px;
+    height: 100%;
+}    
+
+#input-area {
+    margin-top: 6rem;
+    text-align: center;
+}    
+#input-field-label {
+    font-size: 2rem;
+}
+#input-field {
+    width: 30rem;
+    height: 3rem;
+    border-radius: 6px;
+    font-size: 2rem;
+    color: rgb(71, 52, 52);
+}
+
+#send-button-area {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 5rem;
+}
+#btn-send {
+    width: 25%;
+    background-color: #ff7c01;
+    border-radius: 10px;
+}
+
