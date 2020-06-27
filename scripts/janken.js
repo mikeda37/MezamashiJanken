@@ -40,11 +40,11 @@ const main = async (keyword) => {
         await formPage.select('select[name="PREF"]', member.pref);
         await formPage.$eval('input[name="ADDR1"]', (el, val) => {el.value = val}, member.address);
 
-        await formPage.click('input[type="submit"]', {waitUntil: "domcontentloaded"});
-        await formPage.click('input[type="submit"]', {waitUntil: "domcontentloaded"});
+        // await formPage.click('input[type="submit"]', {waitUntil: "domcontentloaded"});
+        // await formPage.click('input[type="submit"]', {waitUntil: "domcontentloaded"});
 
-        await formPage.goBack({waitUntil: "domcontentloaded"});
-        await formPage.goBack({waitUntil: "domcontentloaded"});
+        // await formPage.goBack({waitUntil: "domcontentloaded"});
+        // await formPage.goBack({waitUntil: "domcontentloaded"});
     }
 
     await browser.close();

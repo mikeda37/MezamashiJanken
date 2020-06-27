@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>めざましじゃんけん応募</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/main.css">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
         </h1>
         <div id="input-area">
             <span id="input-field-label">キーワード：</span>
-            <input id="input-field" type="text">
+            <input id="input-field" type="text" value="すいかばたけ">
         </div>
         <div id="send-button-area">
             <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-send" data-toggle="tooltip" title="応募する">
@@ -26,10 +26,12 @@
         </div>
     </div>
 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
-    <!--
-        <script src="janken.js"></script>
-    -->
+    <!-- Scripts-->
+    <script src="render_process/preload.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="render_process/window.js"></script>
+
 </body>
 
 </html>
