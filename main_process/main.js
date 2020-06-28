@@ -20,8 +20,7 @@ const createWindow = async () => {
             enableRemoteModule: true,
             nodeIntegration: true
         },
-        // 'icon': __dirname + '/shimarin.ico'
-
+        icon:path.join(__dirname, '../assets/img/fujitv.ico'),
         modal: true,
         parent: window,
         show: false
