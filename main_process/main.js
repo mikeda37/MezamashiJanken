@@ -3,10 +3,6 @@ const path = require('path');
 const url = require('url');
 const exec = require('child_process').exec;
 
-var jsdom = require('jsdom');
-$ = require('jquery')(new jsdom.JSDOM().window);
-
-
 let window = null;
 
 /**
