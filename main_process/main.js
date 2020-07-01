@@ -1,7 +1,7 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const url = require('url');
-const exec = require('child_process').exec;
+const {exec} = require('child_process');
 
 let window = null;
 
@@ -51,12 +51,16 @@ app.on('ready', () => {
 
 ipcMain.on('send', (event, data) => {
 
+    let {week} = data;
     let {keyword} = data;
-    const command = 'node scripts/janken.js ' + keyword;
+    const command = 'node scripts/janken.js ' + week + ' ' + keyword;
     
-    exec(command, (err, stdout, stderr) => {
-        if (err) {throw err;}
-    });
+    exec(command, {},
+        (err, stdout, stderr) => {
+            if (err) {throw err;}
+            window.webContents.send('done');
+        }
+    );
 });
 
 

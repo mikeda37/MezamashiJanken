@@ -8,13 +8,13 @@ const members = require('./members.json');
 /**
  * main
  */
-const main = async (keyword) => {
+const main = async (week, keyword) => {
     const browser = await puppeteer.launch({
         headless: false,
         slowMo: 50,
         defaultViewport: {
             width: 1000,
-            height: 1100
+            height: 1200
         },
     });
     const page = await browser.newPage();
@@ -22,12 +22,18 @@ const main = async (keyword) => {
 
     const newPagePromise = new Promise(x => browser.once('targetcreated', target => x(target.page())));
     
-    // 今週分
-    await page.click('#currentweek .btn01 > a', {waitUntil: "domcontentloaded"});
-    // 先週分
-    // await page.click('#lastweek .btn01 > a', {waitUntil: "domcontentloaded"});
+    switch (week) {
+        case 'this':
+            // 今週分
+            await page.click('#currentweek .btn01 > a', {waitUntil: "domcontentloaded"});
+            break;
+        case 'last':
+            // 先週分
+            await page.click('#lastweek .btn01 > a', {waitUntil: "domcontentloaded"});
+            break;
+    }
     
-	const formPage = await newPagePromise;
+    const formPage = await newPagePromise;
 
     for (member of members) {
         await formPage.$eval('input[name="DATA1"]', (el, val) => {el.value = val}, keyword);
@@ -51,5 +57,6 @@ const main = async (keyword) => {
 }
 
 // コマンド実行
-const keyword = process.argv[2];
-main(keyword);
+const week = process.argv[2];
+const keyword = process.argv[3];
+main(week, keyword);
