@@ -7,6 +7,9 @@ const data = {
 };
 
 
+/*
+ * on KEYUP in keyword field
+ */
 $('#keyword-field').on('keyup', () => {
 
     if ($('#keyword-field').val() === '') {
@@ -17,27 +20,66 @@ $('#keyword-field').on('keyup', () => {
 });
 
 
+/*
+ * on CLICK SEND
+ */
 $('#btn-send').on('click', () => {
     if (data.working) return;
 
     data.working = true;
-    $('#btn-send').prop('disabled', true);
-    // $('#btn-send').addClass('disabled');
-
     $('#keyword-field').prop('disabled', true);
+    $('#btn-send').prop('disabled', true);
+
+    $('#btn-send').addClass('working');
+    $('#btn-stop').addClass('working');
     
     data.week = $('#week-choice-area input[type="radio"]:checked').val();
     data.keyword = $('#keyword-field').val();
-    ipcRenderer.send('send', data);
+    ipcRenderer.send('SEND', data);
 });
 
 
-ipcRenderer.on('done', (_, result) => {
+/*
+ * on CLICK STOP
+ */
+$('#btn-stop').on('click', () => {
+    if (!data.working) return;
+
+    data.working = false;
+    $('#btn-stop').prop('disabled', true);
+
+    ipcRenderer.send('STOP');
+});
+
+
+/*
+ * on DONE
+ */
+ipcRenderer.on('DONE', (_, result) => {
+    resetStatus('DONE');
+});
+
+
+/*
+ * on STOPPED
+ */
+ipcRenderer.on('STOPPED', (_, result) => {
+    resetStatus('STOPPED');
+});
+
+
+/**
+ * reset status
+ */
+const resetStatus = (type) => {
     data.working = false;
     
-    $('#btn-send').prop('disabled', false);
-    // $('#btn-send').removeClass('disabled');
-
     $('#keyword-field').prop('disabled', false);
-});
+
+    $('#btn-send').prop('disabled', false);
+    $('#btn-send').removeClass('working');
+    
+    $('#btn-stop').prop('disabled', false);
+    $('#btn-stop').removeClass('working');
+}
 

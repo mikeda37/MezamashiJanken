@@ -1,9 +1,14 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const url = require('url');
-const {exec} = require('child_process');
+const {spawn} = require('child_process');
+const kill = require('tree-kill');
 
 let window = null;
+const status = {
+    working: false,
+    child: null
+};
 
 /**
  * create window
@@ -49,18 +54,29 @@ app.on('ready', () => {
 });
 
 
-ipcMain.on('send', (event, data) => {
+/*
+ * on SEND
+ */
+ipcMain.on('SEND', (event, data) => {
 
+    status.working = true;
     let {week} = data;
     let {keyword} = data;
-    const command = 'node scripts/janken.js ' + week + ' ' + keyword;
     
-    exec(command, {},
-        (err, stdout, stderr) => {
-            if (err) {throw err;}
-            window.webContents.send('done');
-        }
-    );
+    status.child = spawn('node', ['scripts/janken.js', week, keyword]);
+    status.child.stdout.on('data', (data) => {
+        window.webContents.send('DONE');
+    });
+});
+    
+
+/*
+ * on STOP
+ */
+ipcMain.on('STOP', (event, data) => {
+    status.working = false;
+    kill(status.child.pid);
+    window.webContents.send('STOPPED');
 });
 
 
