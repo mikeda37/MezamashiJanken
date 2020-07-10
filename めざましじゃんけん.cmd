@@ -2,8 +2,9 @@
 setlocal
 
 pushd "%~dp0"
-SET /P keyword="Keyword:"
-node scripts\janken.js %keyword%
+SET WEEK="this"
+SET /P KEYWORD="Keyword:"
+node scripts\janken.js %WEEK% %KEYWORD%
 popd
 
 pause
