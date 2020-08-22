@@ -14,14 +14,17 @@ const main = async (week, keyword) => {
         slowMo: 50,
     });
     const page = await browser.newPage();
+    // viewportをフルサイズにする
+    await page._client.send('Emulation.clearDeviceMetricsOverride');
     page.setViewport({
         width: 1300,
         height: 1300
     });
     await page.goto(url, {waitUntil: "domcontentloaded"});
 
-    const newPagePromise = new Promise(x => browser.once('targetcreated', target => x(target.page())));
-    
+    // viewportをフルサイズにする
+    await formPage._client.send('Emulation.clearDeviceMetricsOverride');
+
     switch (week) {
         case 'this':
             // 今週分
