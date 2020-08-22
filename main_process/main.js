@@ -1,8 +1,11 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const url = require('url');
-const {spawn} = require('child_process');
+const {fork} = require('child_process');
 const kill = require('tree-kill');
+const log = require('electron-log');
+
+log.transports.file.file = 'logs/log.log';
 
 let window = null;
 const status = {
@@ -15,9 +18,11 @@ const status = {
  */
 const createWindow = async () => {
 
+    log.info('window created');
+
     window = new BrowserWindow({
-        x: 10,
-        y: 10,
+        x: 2570,
+        y: 250,
         width: 800,
         height: 600,
         webPreferences: {
@@ -37,7 +42,7 @@ const createWindow = async () => {
     }));
 
     // XXX 開発ツールを有効化
-    window.webContents.openDevTools();
+    // window.webContents.openDevTools();
 
     window.once('ready-to-show', () => {
         window.show();
@@ -62,9 +67,13 @@ ipcMain.on('SEND', (event, data) => {
     status.working = true;
     let {week} = data;
     let {keyword} = data;
-    
-    status.child = spawn('node', ['scripts/janken.js', week, keyword]);
-    status.child.stdout.on('data', (data) => {
+
+    status.child = fork(require.resolve('../scripts/janken.js'), [week, keyword], {});
+    status.child.on('exit', (code, sig) => {
+        window.webContents.send('DONE');
+    });
+    status.child.on('error', (error) => {
+        log.error(error);
         window.webContents.send('DONE');
     });
 });
