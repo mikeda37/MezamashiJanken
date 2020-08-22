@@ -12,12 +12,12 @@ const main = async (week, keyword) => {
     const browser = await puppeteer.launch({
         headless: false,
         slowMo: 50,
-        defaultViewport: {
-            width: 1000,
-            height: 1200
-        },
     });
     const page = await browser.newPage();
+    page.setViewport({
+        width: 1300,
+        height: 1300
+    });
     await page.goto(url, {waitUntil: "domcontentloaded"});
 
     const newPagePromise = new Promise(x => browser.once('targetcreated', target => x(target.page())));
