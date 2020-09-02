@@ -16,7 +16,12 @@ const main = async (week, keyword) => {
     log.info('◆week= 【' + week + '】\n');
     log.info('◆keyword= 【' + keyword + '】\n');
     
+    const args = [
+        '--window-position=0,0',
+        '--window-size=1000,1200',
+    ];
     const browser = await puppeteer.launch({
+        args,
         executablePath: puppeteer.executablePath().replace('app.asar', 'app.asar.unpacked'),
         headless: false,
         slowMo: 50,
