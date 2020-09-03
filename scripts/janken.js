@@ -37,21 +37,12 @@ const main = async (week, keyword) => {
 
     await page.goto(url, {waitUntil: "domcontentloaded"});
 
-    // ポップアップページ用処理
-    const newPagePromise = new Promise(x => browser.once('targetcreated', target => x(target.page())));
-    
-    switch (week) {
-        case 'this':
-            // 今週分
-            await page.click('#currentweek .btn01 > a', {waitUntil: "domcontentloaded"});
-            break;
-        case 'last':
-            // 先週分
-            await page.click('#lastweek .btn01 > a', {waitUntil: "domcontentloaded"});
-            break;
-    }
-
-    const formPage = await newPagePromise;
+    // for popup
+    const weekSelector = (week === 'this') ? '#currentweek .btn01 > a' : '#lastweek .btn01 > a';
+    const [formPage] = await Promise.all([
+        new Promise(resolve => page.once('popup', resolve)),
+        await page.click(weekSelector, {waitUntil: "domcontentloaded"}),
+    ]);
     
     // viewportをフルサイズにする
     await formPage._client.send('Emulation.clearDeviceMetricsOverride');
