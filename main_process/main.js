@@ -1,4 +1,5 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
+const Config = require('electron-store');
 const path = require('path');
 const url = require('url');
 const {fork} = require('child_process');
@@ -6,6 +7,15 @@ const kill = require('tree-kill');
 const log = require('electron-log');
 
 log.transports.file.file = 'logs/log.log';
+
+const config = new Config({
+    defaults: {
+        bounds: {
+            width: 800,
+            height: 600,
+        },
+    },
+});
 
 let window = null;
 const status = {
@@ -20,11 +30,12 @@ const createWindow = async () => {
 
     log.info('window created');
 
+    const {width, height, x, y} = config.get('bounds');
     window = new BrowserWindow({
-        x: 2570,
-        y: 250,
-        width: 800,
-        height: 600,
+        x,
+        y,
+        width,
+        height,
         webPreferences: {
             enableRemoteModule: true,
             nodeIntegration: true
@@ -46,6 +57,12 @@ const createWindow = async () => {
 
     window.once('ready-to-show', () => {
         window.show();
+    });
+
+    ['resize', 'move'].forEach(ev => {
+        window.on(ev, () => {
+            config.set('bounds', window.getBounds());
+        })
     });
     
     window.on('closed', () => {
