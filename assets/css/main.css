@@ -42,6 +42,11 @@ body {
     font-weight: 600;
     color: rgb(189, 110, 6);
 }
+#week-choice-area input[type="radio"]:disabled,
+#week-choice-area input[type="radio"]:disabled + label {
+    cursor: default;
+}
+
 #keyword-area {
     margin-top: 2rem;
 }

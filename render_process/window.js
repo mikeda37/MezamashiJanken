@@ -1,10 +1,16 @@
 const {ipcRenderer} = require('electron');
+const moment = require('moment');
 
 const data = {
     working: false,
     week: 'this',
     keyword: ''
 };
+
+// disable last-week selection during Fri.-Sun.
+if (moment().day() > 4 || moment().day() < 1) {
+    $('#week-choice-last').prop('disabled', true);
+}
 
 
 /*
