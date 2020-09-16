@@ -1,5 +1,7 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
 const Config = require('electron-store');
+const ElectronPreferences = require('electron-preferences');
+const os = require('os');
 const path = require('path');
 const url = require('url');
 const {fork} = require('child_process');
