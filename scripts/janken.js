@@ -3,7 +3,7 @@
  *******************************/
 const url = 'https://www.fujitv.co.jp/meza/d/index.html';
 const puppeteer = require('puppeteer');
-const USERS = require('./users.json');
+const USERS = require('../conf/users.json');
 const log = require('electron-log');
 
 log.transports.file.file = 'logs/log.log';
