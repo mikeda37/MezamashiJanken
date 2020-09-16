@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer');
 const USERS = require('../conf/users.json');
 const log = require('electron-log');
 
-log.transports.file.file = 'logs/log.log';
+log.transports.file = 'logs/log.log';
 
 /**
  * main
