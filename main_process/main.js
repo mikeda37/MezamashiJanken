@@ -146,9 +146,6 @@ const applicantInfoTemplate = {
 const preferences = {
     dataStore: path.resolve(app.getPath('userData'), 'preferences.json'),
     defaults: {
-        notes: {
-            folder: path.resolve(os.homedir(), 'Notes')
-        },
         markdown: {
             auto_format_links: true,
             show_gutter: false
