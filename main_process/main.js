@@ -8,7 +8,7 @@ const {fork} = require('child_process');
 const kill = require('tree-kill');
 const log = require('electron-log');
 
-log.transports.file.file = 'logs/log.log';
+log.transports.file = 'logs/log.log';
 
 const config = new Config({
     defaults: {
