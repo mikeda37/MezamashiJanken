@@ -62,7 +62,7 @@ $('#btn-stop').on('click', () => {
  * on DONE
  */
 ipcRenderer.on('DONE', (_, result) => {
-    resetStatus('DONE');
+    activateStatus();
 });
 
 
@@ -70,14 +70,14 @@ ipcRenderer.on('DONE', (_, result) => {
  * on STOPPED
  */
 ipcRenderer.on('STOPPED', (_, result) => {
-    resetStatus('STOPPED');
+    activateStatus();
 });
 
 
 /**
- * reset status
+ * activate status
  */
-const resetStatus = (type) => {
+const activateStatus = () => {
     data.working = false;
     
     $('#keyword-field').prop('disabled', false);
