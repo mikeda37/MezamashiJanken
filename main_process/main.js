@@ -267,7 +267,7 @@ ipcMain.on('SEND', (event, data) => {
     let {week} = data;
     let {keyword} = data;
 
-    status.child = fork(require.resolve('../scripts/janken.js'), [week, keyword], {});
+    status.child = fork(require.resolve('../scripts/janken.js'), [week, keyword, preferences.dataStore], {});
     status.child.on('exit', (code, sig) => {
         window.webContents.send('DONE');
     });

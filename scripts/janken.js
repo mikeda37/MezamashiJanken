@@ -3,7 +3,6 @@
  *******************************/
 const url = 'https://www.fujitv.co.jp/meza/d/index.html';
 const puppeteer = require('puppeteer');
-const USERS = require('../conf/users.json');
 const log = require('electron-log');
 
 log.transports.file = 'logs/log.log';
@@ -11,10 +10,12 @@ log.transports.file = 'logs/log.log';
 /**
  * main
  */
-const main = async (week, keyword) => {
+const main = async (week, keyword, preferences) => {
     
     log.info('◆week= 【' + week + '】\n');
     log.info('◆keyword= 【' + keyword + '】\n');
+    
+    const PREFERENCES = require(preferences);
     
     const args = [
         '--window-position=0,0',
@@ -47,7 +48,9 @@ const main = async (week, keyword) => {
     // viewportをフルサイズにする
     await formPage._client.send('Emulation.clearDeviceMetricsOverride');
 
-    for (user of USERS) {
+    for (let i = 0; i < PREFERENCES.numOfApplicants.numOfApplicants; i++) {
+        const user = PREFERENCES['applicantInfo' + (i + 1)];
+        
         await formPage.$eval('input[name="DATA1"]', (el, val) => {el.value = val}, keyword);
         await formPage.$eval('input[name="KJNAME1"]', (el, val) => {el.value = val}, user.name);
         await formPage.$eval('input[name="KNNAME1"]', (el, val) => {el.value = val}, user.kana);
@@ -71,4 +74,5 @@ const main = async (week, keyword) => {
 // コマンド実行
 const week = process.argv[2];
 const keyword = process.argv[3];
-main(week, keyword);
+const userConf = process.argv[4];
+main(week, keyword, userConf);
