@@ -250,8 +250,15 @@ const createWindow = async () => {
 }
 
 
+/*
+ * on ready
+ */
 app.on('ready', () => {
     createWindow();
+
+    window.on('close', () => {
+        app.quit();
+    })
 });
 
 
