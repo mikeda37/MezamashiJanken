@@ -7,9 +7,9 @@ const puppeteer = require('puppeteer');
 /**
  * main
  */
-const main = async (week, keyword, preferences) => {
+const main = async (week, keyword, preferencesPath) => {
     
-    const PREFERENCES = require(preferences);
+    const PREFERENCES = require(preferencesPath);
     
     const args = [
         '--window-position=0,0',
@@ -68,5 +68,5 @@ const main = async (week, keyword, preferences) => {
 // コマンド実行
 const week = process.argv[2];
 const keyword = process.argv[3];
-const userConf = process.argv[4];
-main(week, keyword, userConf);
+const preferencesPath = process.argv[4];
+main(week, keyword, preferencesPath);
