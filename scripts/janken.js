@@ -3,17 +3,11 @@
  *******************************/
 const url = 'https://www.fujitv.co.jp/meza/d/index.html';
 const puppeteer = require('puppeteer');
-const log = require('electron-log');
-
-log.transports.file = 'logs/log.log';
 
 /**
  * main
  */
 const main = async (week, keyword, preferences) => {
-    
-    log.info('◆week= 【' + week + '】\n');
-    log.info('◆keyword= 【' + keyword + '】\n');
     
     const PREFERENCES = require(preferences);
     
