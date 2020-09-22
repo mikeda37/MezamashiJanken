@@ -30,7 +30,6 @@
     "electron-builder": "^22.7.0"
   },
   "dependencies": {
-    "electron-log": "^4.2.2",
     "electron-preferences": "^2.0.0",
     "electron-store": "^6.0.0",
     "jquery": "^3.5.1",

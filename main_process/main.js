@@ -6,9 +6,6 @@ const path = require('path');
 const url = require('url');
 const {fork} = require('child_process');
 const kill = require('tree-kill');
-const log = require('electron-log');
-
-log.transports.file = 'logs/log.log';
 
 const config = new Config({
     defaults: {
@@ -199,8 +196,6 @@ epWindow = new ElectronPreferences(preferences);
  */
 const createWindow = async () => {
 
-    log.info('window created');
-
     const {width, height, x, y} = config.get('bounds');
     window = new BrowserWindow({
         x,
@@ -296,7 +291,6 @@ ipcMain.on('SEND', (event, data) => {
         window.webContents.send('DONE');
     });
     status.child.on('error', (error) => {
-        log.error(error);
         window.webContents.send('DONE');
     });
 });
