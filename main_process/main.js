@@ -229,7 +229,6 @@ const createWindow = async () => {
 
     window.once('ready-to-show', () => {
         window.show();
-        epWindow.show();
     });
 
     ['resize', 'move'].forEach(ev => {
