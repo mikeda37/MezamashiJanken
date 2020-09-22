@@ -214,7 +214,6 @@ const createWindow = async () => {
         },
         icon:path.join(__dirname, '../assets/img/fujitv.ico'),
         modal: true,
-        parent: window,
         show: false
     });
     window.setMenu(null);
