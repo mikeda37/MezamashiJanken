@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain} = require('electron');
+const {app, BrowserWindow, ipcMain, dialog} = require('electron');
 const Config = require('electron-store');
 const ElectronPreferences = require('electron-preferences');
 const os = require('os');
@@ -173,7 +173,7 @@ const preferences = {
                                 type: 'slider',
                                 min: 1,
                                 max: 99,
-                                help: '変更を反映させるにはアプリの再起動が必要です'
+                                help: '※人数変更を反映させるにはアプリの再起動が必要です'
                             },
                         ]
                     }
@@ -217,6 +217,7 @@ const createWindow = async () => {
         parent: window,
         show: false
     });
+    window.setMenu(null);
 
     window.loadURL(url.format({
         pathname: path.join(__dirname, '../index.html'),
@@ -273,6 +274,18 @@ ipcMain.on('OPEN_PREFERENCES', (event, data) => {
  * on SEND
  */
 ipcMain.on('SEND', (event, data) => {
+
+    const changedNumOfApplicants = epWindow.value('numOfApplicants.numOfApplicants');
+    const inputtedNumOfApplicants = preferences.sections.length - 1;
+    if (changedNumOfApplicants !== inputtedNumOfApplicants) {
+        dialog.showMessageBoxSync(window, {
+            type: 'error',
+            title: '応募者人数エラー',
+            message: '応募者人数を反映させるためにアプリを再起動してください'
+        });
+        window.webContents.send('STOPPED');
+        return;
+    }
 
     status.working = true;
     let {week} = data;
