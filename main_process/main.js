@@ -212,7 +212,6 @@ const createWindow = async () => {
         show: false
     });
     window.setMenu(null);
-    window.setResizable(false);
 
     window.loadURL(url.format({
         pathname: path.join(__dirname, '../index.html'),
