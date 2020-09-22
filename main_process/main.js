@@ -263,6 +263,14 @@ app.on('ready', () => {
 
 
 /*
+ * on OPEN_PREFERENCES
+ */
+ipcMain.on('OPEN_PREFERENCES', (event, data) => {
+    epWindow.show();
+});
+    
+
+/*
  * on SEND
  */
 ipcMain.on('SEND', (event, data) => {

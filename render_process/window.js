@@ -14,6 +14,14 @@ if (moment().day() > 4 || moment().day() < 1) {
 
 
 /*
+ * on CLICK setting icon
+ */
+$('#setting-icon').on('click', () => {
+    ipcRenderer.send('OPEN_PREFERENCES', {});
+});
+
+
+/*
  * on KEYUP in keyword field
  */
 $('#keyword-field').on('keyup', () => {
