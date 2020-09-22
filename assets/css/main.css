@@ -22,8 +22,8 @@ body {
 }
 
 #setting-icon {
-    margin: .5rem;
-    font-size: 1.3rem;
+    margin: 0 .5rem;
+    font-size: 2rem;
     color: #543c30;
     align-self: flex-end;
     cursor: pointer;
