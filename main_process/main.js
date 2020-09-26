@@ -203,8 +203,9 @@ const createWindow = async () => {
         width,
         height,
         webPreferences: {
-            enableRemoteModule: true,
-            nodeIntegration: true,
+            nodeIntegration: false,
+            contextIsolation: true,
+            preload: path.join(__dirname, '../render_process/preload.js'),
             worldSafeExecuteJavaScript: true
         },
         icon:path.join(__dirname, '../assets/img/fujitv.ico'),
@@ -213,14 +214,14 @@ const createWindow = async () => {
     });
     window.setMenu(null);
 
+    // XXX 開発ツールを有効化
+    // window.webContents.openDevTools();
+
     window.loadURL(url.format({
         pathname: path.join(__dirname, '../index.html'),
         protocol: 'file:',
         slashes: true
     }));
-
-    // XXX 開発ツールを有効化
-    // window.webContents.openDevTools();
 
     window.once('ready-to-show', () => {
         window.show();

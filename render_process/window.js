@@ -1,6 +1,3 @@
-const {ipcRenderer} = require('electron');
-const moment = require('moment');
-
 const data = {
     working: false,
     week: 'this',
@@ -8,7 +5,7 @@ const data = {
 };
 
 // disable last-week selection during Fri.-Sun.
-if (moment().day() > 4 || moment().day() < 1) {
+if (momentApi.day() > 4 || momentApi.day() < 1) {
     $('#week-choice-last').prop('disabled', true);
 }
 
@@ -17,7 +14,7 @@ if (moment().day() > 4 || moment().day() < 1) {
  * on CLICK setting icon
  */
 $('#setting-icon').on('click', () => {
-    ipcRenderer.send('OPEN_PREFERENCES', {});
+    ipcRendererApi.send('OPEN_PREFERENCES', {});
 });
 
 
@@ -49,7 +46,7 @@ $('#btn-send').on('click', () => {
     
     data.week = $('#week-choice-area input[type="radio"]:checked').val();
     data.keyword = $('#keyword-field').val();
-    ipcRenderer.send('SEND', data);
+    ipcRendererApi.send('SEND', data);
 });
 
 
@@ -62,14 +59,14 @@ $('#btn-stop').on('click', () => {
     data.working = false;
     $('#btn-stop').prop('disabled', true);
 
-    ipcRenderer.send('STOP');
+    ipcRendererApi.send('STOP');
 });
 
 
 /*
  * on DONE
  */
-ipcRenderer.on('DONE', (_, result) => {
+ipcRendererApi.on('DONE', (_, result) => {
     activateStatus();
 });
 
@@ -77,7 +74,7 @@ ipcRenderer.on('DONE', (_, result) => {
 /*
  * on STOPPED
  */
-ipcRenderer.on('STOPPED', (_, result) => {
+ipcRendererApi.on('STOPPED', (_, result) => {
     activateStatus();
 });
 
