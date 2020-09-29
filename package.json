@@ -1,17 +1,25 @@
 {
   "name": "mezamashi_janken",
   "version": "1.0.0",
-  "description": "",
+  "description": "Batch process for Mezamashi Janken application",
   "main": "main_process/main.js",
   "build": {
-    "productName": "Mezamashi Janken",
+    "productName": "MezamashiJanken",
     "appId": "com.electron.mezamashijanken",
+    "win": {
+      "publisherName": "mikeda37",
+      "certificateSubjectName": "mikeda37",
+      "target": [
+        {
+          "target": "msi",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "assets/img/fujitv.ico"
+    },
     "mac": {
       "category": "your.app.category.type",
       "icon": "assets/img/fujitv.icns"
-    },
-    "win": {
-      "icon": "assets/img/fujitv.ico"
     },
     "asar": true,
     "asarUnpack": "node_modules/puppeteer/.local-chromium/**/*"
@@ -23,7 +31,7 @@
     "dist": "electron-builder"
   },
   "keywords": [],
-  "author": "",
+  "author": "mikeda37",
   "license": "ISC",
   "devDependencies": {
     "electron": "^9.3.0",
