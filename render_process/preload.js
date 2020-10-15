@@ -14,7 +14,7 @@ const moment = require('moment');
 contextBridge.exposeInMainWorld(
     'momentApi', {
         day: () => {
-            moment().day();
+            return moment().day();
         },
     }
 );
