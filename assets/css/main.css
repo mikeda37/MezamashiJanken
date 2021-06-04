@@ -16,7 +16,7 @@ body {
 }
 
 #header {
-    height: 5%;
+    height: 1%;
     display: flex;
     flex-flow: column;
 }
@@ -35,35 +35,63 @@ body {
 }
 
 #contents-area {
-    padding: 20px 0px 20px 0px;
     height: 95%;
 }    
 
 #input-area {
-    margin-top: 3rem;
+    margin-top: 2rem;
     text-align: center;
 }    
-#week-choice-area span {
-    margin: 0 1rem;
-    background-color: rgba(127, 255, 212, 0.404);
-    cursor: pointer;
+#week-choice-area {
+    display: inline-flex;
+    width: 750px;
 }
-#week-choice-area input {
+#week-choice-area .week-choice {
+    display: grid;
+    width: 48%;
+    margin: 0 5px;
+    text-align: -webkit-center;
     cursor: pointer;
+    
+    color: rgb(180, 175, 175);
+    background-color: #f1a05527;
+    border: dashed 2px;
+    border-radius: 20px;
 }
-#week-choice-area label {
-    font-size: 1.3rem;
-    color: rgb(145, 145, 145);
-    cursor: pointer;
+#week-choice-area .week-choice.active:not(.deadline-missed) {
+    color: initial;
+    background-color: #f18b2b62;
+    border: double 2px rgba(117, 108, 98, 0.541);;
+    border-radius: 20px;
 }
-#week-choice-area input[type="radio"]:checked + label {
+
+#week-choice-area .week-choice-input {
+    height: 2.5rem;
+    margin: 0.5rem 1rem;
+}
+#week-choice-area .week-choice input {
+    display: none;
+}
+#week-choice-area .week-choice label {
     font-size: 1.5rem;
     font-weight: 600;
-    color: rgb(189, 110, 6);
+    cursor: pointer;
 }
-#week-choice-area input[type="radio"]:disabled,
-#week-choice-area input[type="radio"]:disabled + label {
-    cursor: default;
+#week-choice-area .week-choice.active:not(.deadline-missed) label {
+    color: rgb(212, 121, 2);
+}
+
+#week-choice-area .week-choice .image {
+    margin: 0.5rem 1rem;
+    filter: grayscale(0.8);
+}
+#week-choice-area .week-choice.active:not(.deadline-missed) .image {
+    filter: none;
+}
+
+#week-choice-area .week-choice .description {
+    width: 85%;
+    margin: 0.5rem 1rem;
 }
 
 #keyword-area {
@@ -82,7 +110,7 @@ body {
 }
 
 #button-area {
-    margin-top: 3rem;
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
     width: 100%;

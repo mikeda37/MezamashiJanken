@@ -10,8 +10,8 @@ const kill = require('tree-kill');
 const config = new Config({
     defaults: {
         bounds: {
-            width: 800,
-            height: 600,
+            width: 770,
+            height: 800,
         },
         numOfApplicants: 1,
     },

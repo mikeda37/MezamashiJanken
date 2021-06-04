@@ -16,5 +16,8 @@ contextBridge.exposeInMainWorld(
         day: () => {
             return moment().day();
         },
-    }
+        lastWeekDate: (dateStr) => {
+            return moment(dateStr).add(-7, 'day').format('YYYYMMDD').toString();
+        },
+    },
 );

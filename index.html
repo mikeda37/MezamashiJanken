@@ -19,22 +19,35 @@
         <h1 id="title">
             <img src="https://www.fujitv.co.jp/meza/d/img/jankenHead.png">
         </h1>
+        
         <div id="input-area">
             <div id="week-choice-area">
-                <span class="week-choice">
-                    <input id="week-choice-this" name="week" type="radio" value="this" checked>
-                    <label for="week-choice-this">今週のプレゼント</label>
-                </span>
-                <span class="week-choice">
-                    <input id="week-choice-last" name="week" type="radio" value="last">
-                    <label for="week-choice-last">先週のプレゼント</label>
-                </span>
+                <div id="currentweek" class="week-choice active">
+                    <span class="week-choice-input">
+                        <input id="week-choice-this" name="week" type="radio" value="this" checked>
+                        <label for="week-choice-this">今週のプレゼント</label>
+                    </span>
+                    <span class="application-deadline"></span>
+                    <img class="image">
+                    <span class="description"></span>
+                </div>
+                <div id="lastweek" class="week-choice">
+                    <span class="week-choice-input">
+                        <input id="week-choice-last" name="week" type="radio" value="last">
+                        <label for="week-choice-last">先週のプレゼント</label>
+                    </span>
+                    <span class="application-deadline"></span>
+                    <img class="image">
+                    <span class="description"></span>
+                </div>
             </div>
+            
             <div id="keyword-area">
                 <span class="label">キーワード：</span>
                 <input id="keyword-field" type="text">
             </div>
         </div>
+        
         <div id="button-area">
             <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-send" data-toggle="tooltip" title="応募する" disabled>
                 <i class="fas fa-paper-plane fa-lg fa-fw"></i> 応募する
