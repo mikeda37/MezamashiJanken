@@ -32,7 +32,7 @@
   },
   "keywords": [],
   "author": "mikeda37",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "electron": "^9.3.0",
     "electron-builder": "^22.7.0"
