@@ -1,7 +1,6 @@
 const {app, BrowserWindow, ipcMain, dialog} = require('electron');
 const Config = require('electron-store');
 const ElectronPreferences = require('electron-preferences');
-const os = require('os');
 const path = require('path');
 const url = require('url');
 const {fork} = require('child_process');
@@ -286,7 +285,7 @@ ipcMain.on('SEND', (event, data) => {
     let {week} = data;
     let {keyword} = data;
 
-    status.child = fork(require.resolve('../scripts/janken.js'), [week, keyword, preferences.dataStore], {});
+    status.child = fork(require.resolve('../scripts/application.js'), [week, keyword, preferences.dataStore], {});
     status.child.on('exit', (code, sig) => {
         window.webContents.send('DONE');
     });
