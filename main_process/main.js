@@ -60,7 +60,7 @@ const createWindow = async () => {
     });
     window.setMenu(null);
 
-    // XXX 開発ツールを有効化
+    // XXX enable dev tools
     // window.webContents.openDevTools();
 
     window.loadURL(url.format({
