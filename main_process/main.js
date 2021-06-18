@@ -12,8 +12,8 @@ epOptions.dataStore = path.resolve(app.getPath('userData'), 'preferences.json');
 const config = new Config({
     defaults: {
         bounds: {
-            width: 770,
-            height: 800,
+            width: 780,
+            height: 830,
         },
         numOfApplicants: 1,
     },
