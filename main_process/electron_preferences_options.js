@@ -10,6 +10,9 @@ const epOptions = {
         },
         drawer: {
             show: true
+        },
+        numOfApplicants: {
+            numOfApplicants: 1
         }
     },
     sections: [
