@@ -91,6 +91,64 @@ const createWindow = async () => {
 }
 
 
+/**
+ * validate applicants info
+ * 
+ * @return validation result
+ */
+const validateApplicantInfo = () => {
+
+    const errorResult = {
+        type: 'error',
+        title: '応募者情報エラー'
+    };
+
+    const applicantInfo1 = epWindow.value('applicantInfo1');
+    if (!applicantInfo1) {
+        errorResult.title = '応募者情報未登録エラー';
+        errorResult.message = '応募者情報を最低１人登録してください';
+        return errorResult;
+    }
+
+    const numOfApplicants = epWindow.value('numOfApplicants.numOfApplicants');
+    for (let i = 0; i < numOfApplicants; i++) {
+        const user = epWindow.value(`applicantInfo${(i + 1)}`);
+        if (!user) {
+            errorResult.message = `応募者情報 ${(i + 1)}を登録してください`;
+
+        } else if (!user.name) {
+            errorResult.message = `応募者情報 ${(i + 1)}（氏名）を登録してください`;
+            
+        } else if (!user.kana) {
+            errorResult.message = `応募者情報 ${(i + 1)}（フリガナ）を登録してください`;
+            
+        } else if (!user.age) {
+            errorResult.message = `応募者情報 ${(i + 1)}（年代）を登録してください`;
+            
+        } else if (!user.gender) {
+            errorResult.message = `応募者情報 ${(i + 1)}（性別）を登録してください`;
+            
+        } else if (!user.tel) {
+            errorResult.message = `応募者情報 ${(i + 1)}（連絡先電話番号）を登録してください`;
+            
+        } else if (!user.zip) {
+            errorResult.message = `応募者情報 ${(i + 1)}（郵便番号）を登録してください`;
+            
+        } else if (!user.pref) {
+            errorResult.message = `応募者情報 ${(i + 1)}（都道府県）を登録してください`;
+
+        } else if (!user.address) {
+            errorResult.message = `応募者情報 ${(i + 1)}（住所）を登録してください`;
+        }
+        if (errorResult.message) {
+            return errorResult;
+        }
+    }
+
+    return {type: 'OK'};
+}
+
+
 /*
  * on ready
  */
@@ -116,9 +174,9 @@ ipcMain.on('OPEN_PREFERENCES', (event, data) => {
  */
 ipcMain.on('SEND', (event, data) => {
 
+    const loadedNumOfApplicants = epOptions.sections.length - 1;
     const changedNumOfApplicants = epWindow.value('numOfApplicants.numOfApplicants');
-    const inputtedNumOfApplicants = epOptions.sections.length - 1;
-    if (changedNumOfApplicants !== inputtedNumOfApplicants) {
+    if (loadedNumOfApplicants !== changedNumOfApplicants) {
         dialog.showMessageBoxSync(window, {
             type: 'error',
             title: '応募者人数エラー',
@@ -127,6 +185,19 @@ ipcMain.on('SEND', (event, data) => {
         window.webContents.send('STOPPED');
         return;
     }
+
+    // validate applicants info
+    const result = validateApplicantInfo();
+    if (result.type === 'error') {
+        dialog.showMessageBoxSync(window, {
+            type: 'error',
+            title: result.title,
+            message: result.message
+        });
+        window.webContents.send('STOPPED');
+        return;
+    }
+
 
     status.working = true;
     let {week} = data;
