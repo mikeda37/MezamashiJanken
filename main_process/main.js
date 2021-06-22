@@ -26,8 +26,8 @@ const status = {
     child: null
 };
 
-const numOfApplicants = config.get('numOfApplicants');
-for (let i = 0; i < numOfApplicants; i++) {
+const confNumOfApplicants = config.get('numOfApplicants');
+for (let i = 0; i < confNumOfApplicants; i++) {
     let applicantInfo = JSON.parse(JSON.stringify(applicantInfoTemplate));
     applicantInfo.id += (i + 1);
     applicantInfo.label += ' ' + (i + 1);
@@ -35,6 +35,11 @@ for (let i = 0; i < numOfApplicants; i++) {
     epOptions.sections.push(applicantInfo);
 }
 epWindow = new ElectronPreferences(epOptions);
+
+// create 'numOfApplicants' key if not exists
+if (!epWindow.value('numOfApplicants.numOfApplicants')) {
+    epWindow.value('numOfApplicants.numOfApplicants', '1');
+}
 
 
 /**
