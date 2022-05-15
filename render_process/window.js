@@ -62,9 +62,9 @@ $('.week-choice').on('click', (e) => {
 
 
 /*
- * on KEYPRESS in keyword field
+ * on KEYUP in keyword field
  */
-$('#keyword-field').on('keypress', () => {
+$('#keyword-field').on('keyup', () => {
 
     if ($('#keyword-field').val() === '') {
         $('#btn-send').prop('disabled', true);
