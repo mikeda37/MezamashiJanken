@@ -13,7 +13,9 @@ const main = async (week, keyword, preferencesPath) => {
     
     const args = [
         '--window-position=0,0',
-        '--window-size=1000,1200',
+        '--window-size=1000,1400',
+        '--disable-infobars',
+        '--enable-automation',
     ];
     const browser = await puppeteer.launch({
         args,
@@ -48,14 +50,15 @@ const main = async (week, keyword, preferencesPath) => {
         await formPage.$eval('input[name="DATA1"]', (el, val) => {el.value = val}, keyword);
         await formPage.$eval('input[name="KJNAME1"]', (el, val) => {el.value = val}, user.name);
         await formPage.$eval('input[name="KNNAME1"]', (el, val) => {el.value = val}, user.kana);
-        await formPage.select('select[name="AGE"]', user.age);
+        await formPage.$eval('select[name="AGE"]', (el, val) => {el.value = val}, user.age);
         await formPage.click('input[name="GENDER"][value="' + user.gender + '"]');
         await formPage.$eval('input[name="TEL1"]', (el, val) => {el.value = val}, user.tel);
         await formPage.$eval('input[name="ZIP"]', (el, val) => {el.value = val}, user.zip);
-        await formPage.select('select[name="PREF"]', user.pref);
+        await formPage.$eval('select[name="PREF"]', (el, val) => {el.value = val}, user.pref);
         await formPage.$eval('input[name="ADDR1"]', (el, val) => {el.value = val}, user.address);
 
         await formPage.click('input[type="submit"]', {waitUntil: "domcontentloaded"});
+        await formPage.waitForSelector('input[type="submit"]');
         await formPage.click('input[type="submit"]', {waitUntil: "domcontentloaded"});
 
         await formPage.goBack({waitUntil: "domcontentloaded"});
