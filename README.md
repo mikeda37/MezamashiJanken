@@ -4,26 +4,26 @@
 
 Applying to Mezamashi Janken will be automated.
 
-# Installation
+## Installation
 
 Download and install from [here](https://github.com/mikeda37/MezamashiJanken/releases).
 
-# Usage
+## Usage
 
 Enter keyword and push apply button.
 
 <div align="center"><img src="./docs/images/main_initial_view.jpg" width="400"/></div>
 
-# Preparation
+## Preparation
 
 Save some applicants information with preferences view.
 
 <div align="center"><img src="./docs/images/pref_applicant_information.jpg" width="400"/></div>
 
-# Note
+## Note
 
 This application is only compatible with Windows-64.
 
-# License
+## License
 
 "MezamashiJanken" is under [MIT license](https://en.wikipedia.org/wiki/MIT_license).
