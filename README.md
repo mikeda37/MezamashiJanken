@@ -12,13 +12,14 @@ Download and install from [here](https://github.com/mikeda37/MezamashiJanken/rel
 
 Enter keyword and push apply button.
 
-<div align="center"><img src="./docs/images/main_initial_view.jpg" width="400"/></div>
+![main_initial_view](https://user-images.githubusercontent.com/41596830/215350765-e0c90ba5-bb0d-41d3-996b-256f32745d87.jpg)
+
 
 ## Preparation
 
 Save some applicants information with preferences view.
 
-<div align="center"><img src="./docs/images/pref_applicant_information.jpg" width="400"/></div>
+![pref_applicant_information](https://user-images.githubusercontent.com/41596830/215350951-ebb4d9a4-7f85-4ede-b07a-676a389f759f.jpg)
 
 ## Note
 
